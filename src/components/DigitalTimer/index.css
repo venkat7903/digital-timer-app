@@ -1,0 +1,125 @@
+/* Write your CSS here */
+.timer-app-container {
+  background-image: linear-gradient(to right, #ffffff, #cffcf1);
+  min-height: 100vh;
+  padding: 10px;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-timer-app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 900px;
+}
+
+.timer-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  background-size: cover;
+  width: 100%;
+  max-width: 400px;
+  height: 40vh;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.current-timer-container {
+  background-color: #fff;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-timer-value {
+  margin: 0;
+  color: #00d9f5;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.timer-status {
+  margin: 0;
+  color: #1e293b;
+  font-weight: bold;
+}
+
+.timer-control-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.timer-control-details-container {
+  display: flex;
+}
+
+.control-container {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.control-img {
+  width: 35px;
+}
+
+.set-timer-container {
+  display: flex;
+  align-items: center;
+}
+
+.inc-dec-button {
+  align-items: center;
+  width: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.set-timer-value {
+  font-size: 25px;
+  margin: 0;
+  background-image: linear-gradient(to right, #cffcf1, #00d9f5);
+  padding: 6px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .sub-timer-app-container {
+    flex-direction: row;
+  }
+
+  .timer-container {
+    height: 50vh;
+  }
+}
