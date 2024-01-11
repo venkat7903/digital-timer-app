@@ -7,7 +7,6 @@ class DigitalTimer extends Component {
     timerValueInMin: 25,
     isTimerRunning: false,
     timeElapsedInSec: 0,
-    isDisable: false,
   }
 
   getTimeString = () => {
@@ -27,7 +26,7 @@ class DigitalTimer extends Component {
 
     if (isTimerComplete) {
       clearInterval(this.timerId)
-      this.onReset()
+      this.setState({isTimerRunning: false})
     } else {
       this.setState(prevState => ({
         timeElapsedInSec: prevState.timeElapsedInSec + 1,
@@ -36,7 +35,12 @@ class DigitalTimer extends Component {
   }
 
   onStartPause = () => {
-    const {isTimerRunning} = this.state
+    const {isTimerRunning, timerValueInMin, timeElapsedInSec} = this.state
+    const isTimerComplete = timerValueInMin * 60 === timeElapsedInSec
+
+    if (isTimerComplete) {
+      this.setState({timeElapsedInSec: 0})
+    }
 
     if (isTimerRunning) {
       clearInterval(this.timerId)
@@ -45,7 +49,6 @@ class DigitalTimer extends Component {
     }
     this.setState(prevState => ({
       isTimerRunning: !prevState.isTimerRunning,
-      isDisable: true,
     }))
   }
 
@@ -55,13 +58,12 @@ class DigitalTimer extends Component {
       timerValueInMin: 25,
       isTimerRunning: false,
       timeElapsedInSec: 0,
-      isDisable: false,
     })
   }
 
   onClickDecrement = () => {
-    const {isDisable} = this.state
-    if (!isDisable) {
+    const {timerValueInMin} = this.state
+    if (timerValueInMin > 1) {
       this.setState(prevState => ({
         timerValueInMin: prevState.timerValueInMin - 1,
       }))
@@ -69,50 +71,40 @@ class DigitalTimer extends Component {
   }
 
   onClickIncrement = () => {
-    const {isDisable} = this.state
-    if (!isDisable) {
-      this.setState(prevState => ({
-        timerValueInMin: prevState.timerValueInMin + 1,
-      }))
-    }
+    this.setState(prevState => ({
+      timerValueInMin: prevState.timerValueInMin + 1,
+    }))
   }
 
   renderTimeControls() {
-    const {isTimerRunning, timerValueInMin} = this.state
+    const {isTimerRunning, timerValueInMin, timeElapsedInSec} = this.state
     const imgUrl = isTimerRunning
       ? 'https://assets.ccbp.in/frontend/react-js/pause-icon-img.png'
       : 'https://assets.ccbp.in/frontend/react-js/play-icon-img.png'
     const altText = isTimerRunning ? 'pause icon' : 'play icon'
+    const isDisable = timeElapsedInSec > 0
 
     return (
       <div className="timer-control-container">
         <div className="timer-control-details-container">
-          <div className="control-container">
-            <button
-              type="button"
-              className="button"
-              onClick={this.onStartPause}
-            >
-              <img src={imgUrl} alt={altText} className="control-img" />
-              <p className="control-text">
-                {isTimerRunning ? 'Pause' : 'Start'}
-              </p>
-            </button>
-          </div>
-          <div className="control-container">
-            <button type="button" className="button" onClick={this.onReset}>
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png"
-                alt="reset icon"
-                className="control-img"
-              />
-              <p className="control-text">Reset</p>
-            </button>
-          </div>
+          <button type="button" className="button" onClick={this.onStartPause}>
+            <img src={imgUrl} alt={altText} className="control-img" />
+            <p className="control-text">{isTimerRunning ? 'Pause' : 'Start'}</p>
+          </button>
+
+          <button type="button" className="button" onClick={this.onReset}>
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png"
+              alt="reset icon"
+              className="control-img"
+            />
+            <p className="control-text">Reset</p>
+          </button>
         </div>
         <p className="timer-limit-text">Set Timer limit</p>
         <div className="set-timer-container">
           <button
+            disabled={isDisable}
             type="button"
             className="inc-dec-button"
             onClick={this.onClickDecrement}
@@ -121,6 +113,7 @@ class DigitalTimer extends Component {
           </button>
           <p className="set-timer-value">{timerValueInMin}</p>
           <button
+            disabled={isDisable}
             type="button"
             className="inc-dec-button"
             onClick={this.onClickIncrement}

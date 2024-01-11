@@ -20,16 +20,35 @@
 }
 
 .timer-container {
-  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
-  background-size: cover;
-  width: 100%;
-  max-width: 400px;
-  height: 40vh;
+  width: 320px;
+  height: 250px;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 35px;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  background-size: cover;
+}
+
+@media screen and (min-width: 576px) {
+  .timer-container {
+    width: 450px;
+    height: 320px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .timer-container {
+    width: 600px;
+    height: 450px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .timer-container {
+    width: 550px;
+    height: 550px;        
+  }
 }
 
 .current-timer-container {
@@ -60,7 +79,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 50%;
 }
 
 .timer-control-details-container {
@@ -79,10 +98,19 @@
   border: none;
   outline: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .control-img {
   width: 35px;
+}
+
+.control-text {
+  color: #0f172a;
+  font-size: 24px;
+  margin-left: 5px;
+  font-weight: bold;
 }
 
 .set-timer-container {
@@ -99,6 +127,7 @@
   background: transparent;
   outline: none;
   cursor: pointer;
+  color: #0f172a;
 }
 
 .set-timer-value {
