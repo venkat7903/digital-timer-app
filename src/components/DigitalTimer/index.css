@@ -79,7 +79,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .timer-container {
+    width: 50%;
+  }
 }
 
 .timer-control-details-container {
